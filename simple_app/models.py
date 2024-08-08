@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.utils import timezone
 from django.urls import reverse
 
+
 class Staff(models.Model):
     director = 'DI'
     admin = 'AD'
@@ -54,9 +55,11 @@ class Material(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProductMaterial(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='productmaterials')
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
+
 
 # Категория, к которой будет привязываться товар
 class Category(models.Model):
@@ -64,6 +67,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name.title()
+
 
 class Order(models.Model):
     time_in = models.DateTimeField(auto_now_add=True)
@@ -84,6 +88,7 @@ class Order(models.Model):
             return (self.time_out - self.time_in).total_seconds()
         else:
             return (datetime.now() - self.time_out).total_seconds()
+
 
 class ProductOrder(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
